@@ -11,6 +11,16 @@ Create a /contabo-s3-and-cloudfront-tweaks/ folder in /wp-content/plugins/ and s
 Setup
 -----
 
-Open the `contabo-s3-and-cloudfront-tweaks.php` file and take a look at the `__construct()` function. You will notice that all the calls to `add_filter()` are commented out. So, at the moment the plugin does nothing even though it's activated. To enable a filter, simply uncomment the appropriate `add_filter()` line, but please make sure the corresponding function further down in the plugin's source has been adjusted to fit your needs.
+Open the `contabo-s3-and-cloudfront-tweaks.php` file and take a look at the `__construct()` function. You will notice that I have added the us central url of contabo object storage which is usc1.contabostorage.com at 5 functions, you have to just replace the url with your contabo object storage url which you have purchased in whichever region, and in wp-config.php you can add your api acces key and secret 
 
-Most of the examples in the plugin's handler functions **will need editing** before they can be used.
+like this:
+define( 'AS3CF_SETTINGS', serialize( array(
+	'provider' => 'aws', 
+	'access-key-id' => '***************',
+	'secret-access-key' => '************',
+) ) );
+
+Replace star with your actual acces key and secret. 
+You need to create rewrite rules in cloudflare to add your bucket id and name in your cdn url.
+You can follow this article for detailed info.
+[How to Setup Contabo Object Storage using Wp offload media plugin in wordpress](https://teklog.in/)
